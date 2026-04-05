@@ -71,7 +71,7 @@ export async function POST(req: NextRequest) {
       messages: [{
         role: 'user',
         content: [
-          { type: 'document', source: { type: 'base64', media_type: mediaType, data: base64 } } as unknown as Anthropic.DocumentBlockParam,
+          { type: 'document', source: { type: 'base64', media_type: mediaType, data: base64 } },
           { type: 'text', text: EXTRACTION_PROMPT },
         ],
       }],
