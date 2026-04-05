@@ -8,18 +8,8 @@ publish = ".next"
 [build.environment]
 NODE_VERSION = "20"
 
-# Increase function timeout for Claude API calls (10s default → 26s)
 [functions]
 included_files = ["node_modules/@anthropic-ai/sdk/**"]
-
-[[functions]]
-path = "/api/analyze"
-[functions.environment]
-# These are set in Netlify UI → Site settings → Environment variables
-# ANTHROPIC_API_KEY
-# NEXT_PUBLIC_SUPABASE_URL
-# NEXT_PUBLIC_SUPABASE_ANON_KEY
-# SUPABASE_SERVICE_ROLE_KEY
 
 # Custom domain
 [[redirects]]
