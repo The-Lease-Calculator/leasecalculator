@@ -69,7 +69,7 @@ export function scoreLeaseQuote(
     totalScore += resPts
     components.push({ label: 'Residual', earned: resPts, max: 25, barColor: resPts >= 18 ? 'green' : resPts >= 10 ? 'amber' : 'red' })
 
-    if (diff > 2) flags.push({ icon: '�'', headline: 'Residual below published rate.', detail: `Your quote shows ${res}% residual, but published rate is ${benchRes}%. A lower residual increases your monthly payment.` })
+    if (diff > 2) flags.push({ icon: '🔑', headline: 'Residual below published rate.', detail: `Your quote shows ${res}% residual, but published rate is ${benchRes}%. A lower residual increases your monthly payment.` })
   }
 
   let feePts = 25
@@ -80,7 +80,7 @@ export function scoreLeaseQuote(
   }
   if (fields.docFee !== null && fields.docFee > 500) {
     feePts -= 8
-    flags.push({ icon: '📄', headline: `Doc fee $${fields.docFee.toLocaleString()} above average.`, detail: 'Doc fees are capped by state law in some states. Check your state\'s maximum.' })
+    flags.push({ icon: '🔄', headline: `Doc fee $${fields.docFee.toLocaleString()} above average.`, detail: 'Doc fees are capped by state law in some states. Check your state\'s maximum.' })
   }
   if (fields.dispositionFee !== null && fields.dispositionFee > 400) {
     feePts -= 5
