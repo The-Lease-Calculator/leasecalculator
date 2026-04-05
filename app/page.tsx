@@ -112,7 +112,7 @@ export default function Home() {
         <div style={{
           maxWidth: 780, margin: '1rem auto 0', padding: '0 2rem',
           background: 'var(--amber-light)', border: '1px solid rgba(154,90,0,0.2)',
-          borderRadius: 'var(--r)', padding2: '0.75rem 1rem',
+          borderRadius: 'var(--r)',
           fontSize: '0.875rem', color: 'var(--amber)',
         }}>
           ⚠ Could not extract from your file — please enter the values manually below.
