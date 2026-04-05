@@ -73,7 +73,7 @@ export async function POST(req: NextRequest) {
         content: [
           { type: 'document', source: { type: 'base64', media_type: mediaType, data: base64 } },
           { type: 'text', text: EXTRACTION_PROMPT },
-        ],
+        ] as any,
       }],
     })
 
