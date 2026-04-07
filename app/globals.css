@@ -2,18 +2,6 @@
 
 :root {
   --ink: #0f0e0d;
-
-/* === Mobile responsive helpers === */
-.hero-wrap { box-sizing: border-box; }
-.info-need-section,
-.dealer-script-section { border-radius: var(--r); }
-
-@media (max-width: 600px) {
-  .hero-wrap { padding: 2rem 1.25rem 1.5rem !important; }
-  .info-need-section { margin: 0.75rem 0 !important; padding: 1.25rem !important; }
-  .dealer-script-section { margin: 0.75rem 0 !important; padding: 1.25rem !important; }
-}
-
   --ink-2: #3a3830;
   --ink-3: #7a7670;
   --paper: #faf8f4;
@@ -123,4 +111,14 @@ body {
 
 @media (max-width: 600px) {
   body { font-size: 15px; }
+}
+/* === Mobile responsive helpers === */
+.hero-wrap { box-sizing: border-box; }
+.info-need-section,
+.dealer-script-section { border-radius: var(--r); }
+
+@media (max-width: 600px) {
+  .hero-wrap { padding: 2rem 1.25rem 1.5rem !important; }
+  .info-need-section { margin: 0.75rem 0 !important; padding: 1.25rem !important; }
+  .dealer-script-section { margin: 0.75rem 0 !important; padding: 1.25rem !important; }
 }
