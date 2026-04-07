@@ -271,6 +271,65 @@ export default function ReportScreen({ result, fields, onReset }: Props) {
         </button>
       </div>
 
+      {/* What would improve this analysis */}
+      {(() => {
+        const missing: Array<{ label: string; tip: string }> = []
+        if (fields.moneyFactor == null) missing.push({ label: "Money Factor", tip: "Ask the dealer: what is the money factor on this lease? Multiply by 2,400 to convert to an APR." })
+        if (fields.residualPct == null) missing.push({ label: "Residual %", tip: "Ask: what is the residual value as a percentage of MSRP? Typically 40-60% depending on the vehicle." })
+        if (fields.msrp == null) missing.push({ label: "MSRP", tip: "Find the sticker price on the window or at edmunds.com. Residual value is calculated from this figure." })
+        if (fields.sellingPrice == null) missing.push({ label: "Selling Price / Cap Cost", tip: "Ask: what is the capitalized cost? This is the negotiated price before any deductions or fees." })
+        if (fields.acquisitionFee == null) missing.push({ label: "Acquisition Fee", tip: "Ask: what is the acquisition fee? Usually $500-$1,000 charged by the bank and typically non-negotiable." })
+        if (fields.dispositionFee == null) missing.push({ label: "Disposition Fee", tip: "Ask: is there a disposition fee at lease end? Usually $300-$400. May be waived if you re-lease." })
+        if (fields.dueAtSigning == null) missing.push({ label: "Due at Signing", tip: "Request a full breakdown: first-month payment, acquisition fee, taxes, and any cap cost reduction." })
+        if (missing.length === 0) return null
+        return (
+          <div className="info-need-section" style={{ background: 'var(--paper-2)', border: '1px solid var(--border)', padding: '1.5rem', margin: '1.5rem 0' }}>
+            <h3 style={{ fontFamily: 'var(--serif)', fontSize: '1.1rem', marginBottom: '1rem', color: 'var(--ink)' }}>What would improve this analysis?</h3>
+            <p style={{ color: 'var(--ink-2)', fontSize: '0.9rem', marginBottom: '1rem' }}>Add these details for a more precise score:</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              {missing.map(({ label, tip }) => (
+                <div key={label} style={{ background: 'var(--paper)', border: '1px solid var(--border)', borderRadius: 'var(--r)', padding: '0.75rem 1rem' }}>
+                  <div style={{ fontWeight: 600, color: 'var(--ink)', marginBottom: '0.25rem' }}>{label}</div>
+                  <div style={{ fontSize: '0.85rem', color: 'var(--ink-2)' }}>{tip}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )
+      })()}
+
+      {/* Dealer talking points */}
+      {(() => {
+        const scripts: Array<{ heading: string; body: string }> = []
+        if (result.verdict === 'great') {
+          scripts.push({ heading: "Confirm and lock it in", body: "I have done my research and this deal looks competitive. I am ready to move forward today. Can you confirm the money factor and residual have not changed and get the paperwork started?" })
+          scripts.push({ heading: "Ask about additional incentives", body: "Before I sign — are there any loyalty, conquest, or manufacturer incentives I might qualify for? I want to make sure I am capturing everything available." })
+        } else if (result.verdict === 'fair') {
+          scripts.push({ heading: "Negotiate the selling price", body: "The monthly is close to what I am targeting, but I would like to see the cap cost come down. I have benchmarked similar deals. Can you get to [your target price]?" })
+          scripts.push({ heading: "Check for money factor markup", body: "Can you show me the base buy rate from the bank? I want to confirm the money factor has not been marked up from what the lender offers." })
+        } else if (result.verdict === 'negotiate') {
+          scripts.push({ heading: "Push back on the payment", body: "This payment is higher than what I am targeting. To make this work today I need it lower. What levers do we have — selling price, money factor, or additional incentives?" })
+          scripts.push({ heading: "Audit every fee", body: "Walk me through every fee in this deal. I want to know what is mandatory and what is optional, including any dealer add-ons. Let us get back to the core numbers." })
+          scripts.push({ heading: "Leverage competing offers", body: "I have quotes from other dealers I am comparing right now. This is your chance to earn my business today. What is the absolute best payment you can offer?" })
+        } else {
+          scripts.push({ heading: "Walk away cleanly", body: "I appreciate your time, but the numbers do not work for me. I am going to continue my search. Please do not follow up — I will reach out if anything changes." })
+          scripts.push({ heading: "State your terms clearly", body: "The only scenario where this works is [monthly target] per month with [amount] due at signing. If manufacturer incentives improve or you find new flexibility, feel free to reach out." })
+        }
+        return (
+          <div className="dealer-script-section" style={{ background: 'var(--paper-2)', border: '1px solid var(--border)', padding: '1.5rem', margin: '1.5rem 0' }}>
+            <h3 style={{ fontFamily: 'var(--serif)', fontSize: '1.1rem', marginBottom: '1rem', color: 'var(--ink)' }}>How to talk to your dealer</h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {scripts.map(({ heading, body }) => (
+                <div key={heading} style={{ background: 'var(--paper)', border: '1px solid var(--border)', borderRadius: 'var(--r)', padding: '1rem' }}>
+                  <div style={{ fontWeight: 600, color: 'var(--ink)', marginBottom: '0.5rem' }}>{heading}</div>
+                  <div style={{ fontSize: '0.9rem', color: 'var(--ink-2)', fontStyle: 'italic', lineHeight: 1.5 }}>{body}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )
+      })()}
+
       {/* Disclaimer */}
       <div className="disclaimer">
         This analysis is for informational purposes only and does not constitute financial or
