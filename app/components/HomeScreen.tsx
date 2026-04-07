@@ -26,7 +26,7 @@ export default function HomeScreen({ onFileSelected, onManualEntry }: Props) {
   return (
     <>
       {/* Hero */}
-      <div style={{
+      <div className="hero-wrap" style={{
         maxWidth: 720, margin: '0 auto',
         padding: '5rem 2rem 3rem',
         textAlign: 'center',
